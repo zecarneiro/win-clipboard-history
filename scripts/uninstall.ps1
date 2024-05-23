@@ -28,6 +28,8 @@ function validateProcessRunning() {
 }
 
 function uninstall {
+    Invoke-Expression "$SCRIPT_UNINSTALL_DIR\delete-boot.ps1"
+    del_shortcut_file "Win Clipboard History"
     if ((directoryExists "$INSTALL_DIR")) {
         Invoke-Expression "$INSTALL_DIR\delete-boot.ps1"
         Remove-Item "$INSTALL_DIR" -Recurse -Force
