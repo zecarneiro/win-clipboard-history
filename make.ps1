@@ -81,12 +81,10 @@ function cleanClipboard() {
 }
 
 function release() {
-    $compress = @{
-        Path = "$RELEASE_DIR\*"
-        CompressionLevel = "Fastest"
-        DestinationPath = "$MAKE_SCRIPT_DIR\$BINARY_NAME.zip"
+    Compress-Archive "$RELEASE_DIR\*" -DestinationPath "$MAKE_SCRIPT_DIR\$BINARY_NAME.zip" -Force
+    if ((directoryexists "$RELEASE_DIR")) {
+        Remove-Item "$RELEASE_DIR" -Force -Recurse
     }
-    Compress-Archive @compress -Force
 }
 
 function main() {
